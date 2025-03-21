@@ -1,12 +1,7 @@
 import { initializeApp } from "firebase/app";
-import {
-  getAuth,
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-} from "firebase/auth";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDR8l6Pg7hscJwfJN__in0A6HJq8rzzESE",
   authDomain: "auth-141f0.firebaseapp.com",
@@ -23,8 +18,7 @@ const app = initializeApp(firebaseConfig);
 // Initialize Authentication
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
-const facebookProvider = new FacebookAuthProvider();
 
 // Export modules
-export { auth, googleProvider, facebookProvider };
-export default auth; // ✅ يسمح بالاستيراد كـ `import auth from "../firebaseConfig";`
+export { auth, googleProvider };
+export default auth;

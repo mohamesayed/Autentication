@@ -18,17 +18,13 @@ import {
   ThemeProvider,
   createTheme,
 } from "@mui/material";
-import {
-  Google,
-  Facebook,
-  Visibility,
-  VisibilityOff,
-} from "@mui/icons-material";
-import { auth, googleProvider, facebookProvider } from "./firebaseAuth";
+import { Google, Visibility, VisibilityOff } from "@mui/icons-material";
+import { auth } from "./firebaseAuth";
 import {
   signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  GoogleAuthProvider, // استيراد GoogleAuthProvider
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -108,18 +104,12 @@ const AuthPage = () => {
     }
   };
 
+  // تعريف googleProvider هنا
+  const googleProvider = new GoogleAuthProvider();
+
   const handleGoogleSignIn = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
-      navigate("/dashboard");
-    } catch (error) {
-      setSnackbar({ open: true, message: error.message, severity: "error" });
-    }
-  };
-
-  const handleFacebookSignIn = async () => {
-    try {
-      await signInWithPopup(auth, facebookProvider);
       navigate("/dashboard");
     } catch (error) {
       setSnackbar({ open: true, message: error.message, severity: "error" });
@@ -173,20 +163,6 @@ const AuthPage = () => {
                 }}
               >
                 Sign in with Google
-              </Button>
-
-              <Button
-                fullWidth
-                variant="contained"
-                startIcon={<Facebook />}
-                onClick={handleFacebookSignIn}
-                sx={{
-                  bgcolor: "#4267B2",
-                  "&:hover": { bgcolor: "#365899" },
-                  mb: 1,
-                }}
-              >
-                Sign in with Facebook
               </Button>
 
               <FormControl fullWidth variant="outlined" sx={{ mb: 2 }}>
